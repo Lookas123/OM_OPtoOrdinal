@@ -1,6 +1,6 @@
 function OPtoOrd(op, base){
     if(op<=0)return ""
-    if(op<base)return op
+    if(op<base){console.log("kaka");return op}
     let ord=[]
     let powers = [0,0,0]
     let origOP = op;
@@ -14,8 +14,9 @@ function OPtoOrd(op, base){
     }
     let divisor = Math.floor(op)
     if(divisor==1||divisor==0)divisor="";
-    ord+=powersToSingleOrd(powers)+divisor;
-    let thingy = OPtoOrd((origOP-(10**(100*(powers[2])+powers[1]*10+powers[0])*(divisor==""?1:divisor))), base);
+    ord+=powersToSingleOrd(powers)+(divisor!=""?"*":"")+divisor;
+    console.log(powers);
+    let thingy = OPtoOrd((origOP-(10**(100*(powers[2])+powers[1]*10+powers[0])*(divisor==""?1:+divisor))), base);
     ord+=thingy==""?"":"+"+thingy
     return ord;
     
@@ -40,7 +41,7 @@ const op = document.getElementById("op");
 const base = document.getElementById("base");
 const display = document.getElementById("disp");
 function calculateStuff(){
-    let OP=op.value;
-    let Base=base.value;
+    let OP=Number(op.value);
+    let Base=Number(base.value);
     display.innerHTML=OPtoOrd(OP, Base)
 }
